@@ -93,7 +93,11 @@ h1 { margin: 0; font: 600 clamp(27px, 7.4vw, 42px)/1.15 var(--head); letter-spac
 .step p b { font-weight: 800; }
 .how .note { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 70ch; }
 .how .pay { margin: 0; font: 600 15px/1.4 var(--head); }
-.lead a { color: var(--white); font-weight: 700; }
+.cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; background: var(--coral); color: var(--on-coral); text-decoration: none; border-radius: 3px; padding: 13px 20px; font: 600 16px/1.2 var(--head); }
+.cta:hover { background: #ff6a2b; }
+.links a.nav-how { color: var(--coral-text); }
+.links a { white-space: nowrap; }
+@media (max-width: 420px) { .links { gap: 12px; font-size: 13.5px; } .logo-img { width: 120px; height: 58px; } }
 .foot { background: var(--green-2); color: var(--white); }
 .foot .in { padding-block: 24px calc(24px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 10px; }
 .foot h2 { margin: 0; font: 600 19px/1.25 var(--head); }
@@ -106,7 +110,7 @@ h1 { margin: 0; font: 600 clamp(27px, 7.4vw, 42px)/1.15 var(--head); letter-spac
   <div class="in bar">
     <img class="logo-img" src="fotos/logo.jpg" alt="Ziggy">
     <nav class="links" aria-label="Contacto">
-      <a href="#como-pedir">Cómo pedir</a>
+      <a class="nav-how" href="#como-pedir">Cómo pedir</a>
       <a href="https://wa.me/595984488787" target="_blank" rel="noopener">WhatsApp</a>
       <a href="https://www.instagram.com/ziggy.py/" target="_blank" rel="noopener">Instagram</a>
     </nav>
@@ -114,7 +118,8 @@ h1 { margin: 0; font: 600 clamp(27px, 7.4vw, 42px)/1.15 var(--head); letter-spac
   <div class="hero-band"><div class="in hero">
     <p class="eyebrow">Tecnología &amp; accesorios</p>
     <h1>Lápices y accesorios para tu tablet y celular</h1>
-    <p class="lead">Elegís acá y nos pedís por WhatsApp. <a href="#como-pedir">Ver cómo pedir</a></p>
+    <p class="lead">Elegís acá y nos pedís por WhatsApp.</p>
+    <a class="cta" href="#como-pedir">¿Cómo hacer tu pedido? <span aria-hidden="true">→</span></a>
   </div></div>
 </header>
 <div class="promo"><div class="in"><span id="promo-a"></span><span>Hasta agotar stock</span></div></div>
@@ -242,7 +247,7 @@ function render() {
   FILTERS.forEach(([id, l]) => { const b = tag("button", "chip", l); b.type = "button"; b.setAttribute("aria-pressed", filter === id); b.onclick = () => { filter = id; render(); }; c.append(b); });
 }
 const lowest = Math.min(...CATALOG.flatMap(p => p.vars.filter(v => v.was && inStock(v)).map(v => v.price)));
-$("promo-a").textContent = "Liquidación: lápices desde " + gs(lowest);
+$("promo-a").textContent = "Liquidación: desde " + gs(lowest);
 render();
 </script>
 
