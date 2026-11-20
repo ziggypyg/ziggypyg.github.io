@@ -186,13 +186,13 @@ const CATALOG = [
     { label: "Rosa", photo: "CAS-A16-ROS", price: 150000, stock: 0 } ] },
   { cat: "cases", name: "Case para iPad mini 6 / mini 7", note: "Color negro, con parte trasera transparente y tapa plegable que sirve de soporte.", vars: [
     { label: "Negro", photo: "CAS-MINI-NEG", price: 120000, stock: 1 } ] },
-  { cat: "cases", name: "Case para iPad A16 con lugar para el lápiz", note: "iPad A16 (11\", 2025). Parte trasera transparente, tapa plegable que sirve de soporte y lugar para guardar el lápiz.", soon: "Llega en las próximas semanas. Podés reservarlo.", vars: [
+  { cat: "cases", name: "Case para iPad A16 con lugar para el lápiz", soon: "Llega en las próximas semanas. Podés reservarlo.", vars: [
     { label: "Negro", photo: "CAS-A16-ORI-NEG", price: 150000, stock: 2 },
     { label: "Gris", photo: "CAS-A16-ORI-GRI", price: 150000, stock: 1 },
     { label: "Rosa", photo: "CAS-A16-ORI-ROS", price: 150000, stock: 1 },
     { label: "Lila", photo: "CAS-A16-ORI-LIL", price: 150000, stock: 1 },
     { label: "Rosa con cierre magnético", photo: "CAS-A16-ORI-RMG", price: 150000, stock: 1 } ] },
-  { cat: "cases", name: "Case floral para iPad A16", note: "iPad A16 (11\", 2025). Parte trasera acrílica transparente con diseño de flores y lugar para el lápiz.", soon: "Llega en las próximas semanas. Podés reservarlo.", vars: [
+  { cat: "cases", name: "Case floral para iPad A16", soon: "Llega en las próximas semanas. Podés reservarlo.", vars: [
     { label: "Floral", photo: "CAS-A16-FLO", price: 150000, stock: 1 } ] },
   { cat: "cases", name: "Lámina de vidrio templado", note: "Elegí tu dispositivo.", always: true, vars: [
     { label: "iPad A16", photo: "VID-A16-TRA", price: 110000, stock: 1 } ] },
@@ -241,10 +241,11 @@ function card(p) {
     box.classList.toggle("is-out", out); sold.hidden = !(out || soon);
     sold.textContent = out ? "Agotado" : "Llega pronto"; sold.classList.toggle("soon", soon);
     if (out || soon) { off.hidden = true; last.hidden = true; }
+    prices.hidden = soon;
     buy.textContent = out ? "Agotado · consultar reposición" : soon ? "Reservar por WhatsApp" : "Pedir por WhatsApp";
     [...vars.children].forEach((b, i) => b.setAttribute("aria-pressed", i === pick.i));
     const item = p.name + (p.vars.length > 1 || p.always ? " (" + v.label + ")" : "");
-    const msg = out ? "¡Hola Ziggy! Vi que " + item + " está agotado. ¿Van a reponer?" : soon ? "¡Hola Ziggy! Quiero reservar: " + item + " a " + gs(v.price) + ". ¿Cuándo llega?" : "¡Hola Ziggy! Quiero pedir: " + item + " a " + gs(v.price) + ". ¿Está disponible?";
+    const msg = out ? "¡Hola Ziggy! Vi que " + item + " está agotado. ¿Van a reponer?" : soon ? "¡Hola Ziggy! Me interesa reservar: " + item + ". ¿Me pasás el precio y cuándo llega?" : "¡Hola Ziggy! Quiero pedir: " + item + " a " + gs(v.price) + ". ¿Está disponible?";
     buy.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
   }
   paint();
