@@ -213,7 +213,7 @@ const CATALOG = [
 // Las variantes sin stock se muestran como agotadas; los productos agotados van al final.
 const inStock = v => v.stock > 0;
 const anyStock = p => p.vars.some(inStock);
-const FILTERS = [["todo", "Todo"], ["promo", "Liquidación"], ["lapices", "Lápices"], ["puntas", "Puntas"], ["fundas", "Fundas"], ["cases", "Cases y láminas"], ["otros", "Accesorios"]];
+const FILTERS = [["todo", "Todo"], ["promo", "Liquidación"], ["lapices", "Stylus"], ["puntas", "Puntas"], ["fundas", "Fundas"], ["cases", "Cases y láminas"], ["otros", "Accesorios"]];
 const $ = id => document.getElementById(id);
 const gs = n => "₲" + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const tag = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
