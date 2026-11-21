@@ -94,7 +94,11 @@ h1 { margin: 0; font: 600 clamp(27px, 7.4vw, 42px)/1.15 var(--head); letter-spac
 .step p { margin: 6px 0 0; font-size: 15px; line-height: 1.45; grid-column: 2; }
 .step p b { font-weight: 800; }
 .how .note { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 70ch; }
-.how .pay { margin: 0; font: 600 15px/1.4 var(--head); }
+.pay-box { background: var(--white); border: 1px solid var(--line); border-left: 4px solid var(--coral); border-radius: 4px; padding: 14px 16px; max-width: 420px; }
+.pay-box h3 { margin: 0 0 8px; font: 600 16px/1.2 var(--head); }
+.pay-box dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 15px; }
+.pay-box dt { color: var(--muted); }
+.pay-box dd { margin: 0; font-weight: 800; font-variant-numeric: tabular-nums; }
 .cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; background: var(--coral); color: var(--on-coral); text-decoration: none; border-radius: 3px; padding: 13px 20px; font: 600 16px/1.2 var(--head); }
 .cta:hover { background: #ff6a2b; }
 .links a.nav-how { color: var(--coral-text); }
@@ -138,7 +142,7 @@ h1 { margin: 0; font: 600 clamp(27px, 7.4vw, 42px)/1.15 var(--head); letter-spac
     <div class="step"><span class="n">3</span><h3>Envío al interior <small>por TSI o AEX</small></h3><p><b>Transferís el monto del producto antes del despacho</b> y el envío se paga en destino.</p></div>
   </div>
   <p class="note">En los envíos te mandamos fotos o videos del producto antes de despachar, y en el interior, también el comprobante del transporte.</p>
-  <p class="pay">Transferencias: alias 0984488787</p>
+  <div class="pay-box"><h3>Datos para transferencia</h3><dl><dt>Alias</dt><dd>0984488787</dd><dt>Nombre</dt><dd>Laura Santacruz</dd><dt>Banco</dt><dd>Banco Continental</dd></dl></div>
 </div></section>
 <footer class="foot"><div class="in">
   <h2>¿Tenés una duda?</h2>
