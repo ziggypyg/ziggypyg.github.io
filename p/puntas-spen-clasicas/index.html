@@ -11,7 +11,7 @@
 <meta property="og:description" content="Pack de 5. ₲40.000. Pedidos por WhatsApp.">
 <meta property="og:type" content="product">
 <meta property="og:url" content="https://ziggypyg.github.io/p/puntas-spen-clasicas/">
-<meta property="og:image" content="https://ziggypyg.github.io/fotos/PUN-CLA-NEG.jpg?v=mww8wuc1">
+<meta property="og:image" content="https://ziggypyg.github.io/fotos/PUN-CLA-NEG.jpg?v=mww8ztfp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1b1b31">
 <link rel="icon" href="fotos/logo.jpg">
@@ -96,6 +96,36 @@ h1 { margin: 0; font: 600 clamp(27px, 7.4vw, 42px)/1.15 var(--head); letter-spac
 .share { background: var(--white); border: 1px solid var(--line); border-radius: 3px; padding: 10px 4px; font: 500 14px/1.2 var(--head); color: var(--ink); }
 .share:hover { border-color: var(--ink); }
 body.product .hero-band, body.product .promo, body.product .chips { display: none; }
+.add { background: var(--white); border: 1px solid var(--green); border-radius: 3px; padding: 9px 4px; font: 500 13.5px/1.2 var(--head); color: var(--green); }
+.add:hover { background: var(--tint); }
+.add.in-cart { border-color: var(--coral); color: var(--coral-text); background: var(--tint); }
+.cartbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--green); color: var(--white); padding: 10px max(16px, env(safe-area-inset-left, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -4px 18px rgba(27,27,49,.18); }
+.cartbar .in { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0; }
+.cartbar b { font: 600 15px/1.2 var(--head); font-variant-numeric: tabular-nums; }
+.cartbar button { background: var(--coral); color: var(--on-coral); border: 0; border-radius: 3px; padding: 10px 14px; font: 600 14.5px/1.2 var(--head); white-space: nowrap; }
+body.has-cart { padding-bottom: 72px; }
+.cart { border: 0; padding: 0; width: min(560px, 100%); max-width: 100%; max-height: 92dvh; margin: auto auto 0; border-radius: 10px 10px 0 0; color: var(--ink); }
+@media (min-width: 760px) { .cart { margin: auto; border-radius: 8px; } }
+.cart::backdrop { background: rgba(17,17,34,.5); }
+.cart .hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px 10px; border-bottom: 1px solid var(--line); }
+.cart h2 { margin: 0; font: 600 19px/1.2 var(--head); }
+.cart .x { background: none; border: 0; font-size: 26px; line-height: 1; padding: 2px 6px; color: var(--muted); }
+.cart ul { list-style: none; margin: 0; padding: 4px 18px; }
+.cart li { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.cart li img { width: 52px; height: 52px; object-fit: contain; grid-row: span 2; }
+.cart .it { font: 500 14.5px/1.25 var(--head); }
+.cart .it small { display: block; color: var(--muted); font: 400 13px/1.3 var(--body); }
+.cart .sub { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; }
+.cart .qty { display: flex; align-items: center; gap: 2px; grid-column: 2; }
+.cart .qty button { width: 30px; height: 30px; border: 1px solid var(--line); background: var(--white); border-radius: 3px; font-weight: 800; }
+.cart .qty span { min-width: 26px; text-align: center; font-weight: 800; }
+.cart .rm { grid-column: 3; background: none; border: 0; color: var(--muted); font-size: 13px; text-decoration: underline; }
+.cart .ft { padding: 12px 18px calc(18px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 8px; }
+.cart .tot { display: flex; justify-content: space-between; font: 600 18px/1.2 var(--head); font-variant-numeric: tabular-nums; }
+.cart .combo { margin: 0; color: var(--coral-text); font-size: 13.5px; font-weight: 800; }
+.cart .fine { margin: 0; color: var(--muted); font-size: 13px; }
+.cart .send { display: block; text-align: center; background: #1f8f4e; color: #fff; border-radius: 3px; padding: 13px 6px; font: 600 15px/1.2 var(--head); text-decoration: none; }
+.cart .empty { margin: 0; padding: 22px 18px; color: var(--muted); }
 .how { background: var(--paper); border-top: 1px solid var(--line); scroll-margin-top: env(safe-area-inset-top, 0px); }
 .how .in { padding-block: 32px 36px; display: flex; flex-direction: column; gap: 18px; }
 .how h2 { margin: 0; font: 600 clamp(22px, 5vw, 28px)/1.2 var(--head); letter-spacing: -.01em; }
@@ -195,6 +225,18 @@ body.product .hero-band, body.product .promo, body.product .chips { display: non
   <p class="small">Stock limitado: confirmá la disponibilidad antes de pagar. Los productos genéricos o compatibles no son de la marca del equipo.</p>
 </div></footer>
 
+<div class="cartbar" id="cartbar" hidden><div class="in"><b id="cartsum"></b><button type="button" id="cartopen">Ver carrito</button></div></div>
+<dialog class="cart" id="cart" aria-labelledby="cart-t">
+  <div class="hd"><h2 id="cart-t">Tu carrito</h2><button class="x" type="button" id="cartclose" aria-label="Cerrar">×</button></div>
+  <ul id="cartlist"></ul>
+  <div class="ft" id="cartft">
+    <p class="combo" id="cartcombo" hidden></p>
+    <div class="tot"><span>Total</span><span id="carttot"></span></div>
+    <a class="send" id="cartsend" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+    <p class="fine">Te confirmamos el stock y coordinamos el retiro o el envío por WhatsApp.</p>
+  </div>
+</dialog>
+
 <script>
 const WA = "595984488787";
 // En las páginas de producto (p/<id>/) el <html> trae data-product con el id del producto.
@@ -284,6 +326,9 @@ function card(p) {
   if (p.vars.length > 1 || p.always) { p.vars.forEach((v, i) => { const b = tag("button", "var" + (inStock(v) ? "" : " agot"), v.label + (inStock(v) ? "" : " · agotado")); b.type = "button"; b.onclick = () => { pick.i = i; paint(); }; vars.append(b); }); info.append(vars); }
   const bottom = tag("div", "bottom"), prices = tag("div", "prices"), now = tag("span", "now"), was = tag("span", "was"), last = tag("p", "last", "Últimas unidades"), buy = tag("a", "buy", "Pedir por WhatsApp");
   buy.target = "_blank"; buy.rel = "noopener"; prices.append(now, was); bottom.append(prices, last, buy); info.append(bottom);
+  const add = tag("button", "add", "Agregar al carrito"); add.type = "button"; bottom.insertBefore(add, buy);
+  add.onclick = () => { const v = p.vars[pick.i], k = p.id + "|" + v.label, c = cartGet(); if (c[k]) { $("cart").showModal(); return; } const q = 1; if (q > v.stock) { add.textContent = "No hay más stock"; setTimeout(paint, 1500); return; } c[k] = q; cartSet(c); paint(); };
+  cardsPaint.push(() => paint());
   if (ONLY) { const sh = tag("button", "share", "Compartir este producto"); sh.type = "button"; sh.onclick = async () => { const url = location.origin + location.pathname; try { if (navigator.share) { await navigator.share({ title: p.name + " · Ziggy", url }); return; } await navigator.clipboard.writeText(url); sh.textContent = "Link copiado ✓"; setTimeout(() => sh.textContent = "Compartir este producto", 2000); } catch (e) {} }; bottom.append(sh); }
   function paint() {
     const v = p.vars[pick.i];
@@ -301,6 +346,9 @@ function card(p) {
     const item = p.name + (p.vars.length > 1 || p.always ? " (" + v.label + ")" : "");
     const msg = out ? "¡Hola Ziggy! Vi que " + item + " está agotado. ¿Van a reponer?" : soon ? "¡Hola Ziggy! Me interesa reservar: " + item + ". ¿Me pasás el precio y cuándo llega?" : "¡Hola Ziggy! Quiero pedir: " + item + " a " + gs(v.price) + ". ¿Está disponible?";
     buy.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+    const q = cartGet()[p.id + "|" + v.label] || 0;
+    add.hidden = out || soon; add.classList.toggle("in-cart", q > 0);
+    add.textContent = q > 0 ? "✓ En el carrito (" + q + ")" : "Agregar al carrito";
   }
   paint();
   if (ONLY) box.append(pic);
@@ -308,7 +356,7 @@ function card(p) {
   return box;
 }
 function render() {
-  const g = $("grid"); g.textContent = "";
+  const g = $("grid"); g.textContent = ""; cardsPaint.length = 0;
   if (ONLY) { const p = CATALOG.find(x => x.id === ONLY); if (p) { g.classList.add("detail"); g.append(card(p)); return; } }
   CATALOG.filter(p => filter === "todo" || (filter === "promo" ? hasPromo(p) : p.cat === filter)).sort((a, b) => anyStock(b) - anyStock(a)).forEach(p => g.append(card(p)));
   const c = $("chips"); c.textContent = "";
@@ -316,8 +364,59 @@ function render() {
 }
 const lowest = Math.min(...CATALOG.flatMap(p => p.vars.filter(v => v.was && inStock(v)).map(v => v.price)));
 $("promo-a").textContent = "Liquidación: desde " + gs(lowest);
+// Carrito: se guarda solo en el navegador del cliente.
+const cardsPaint = [];
+const CK = "ziggy-carrito";
+function cartGet() { try { return JSON.parse(localStorage.getItem(CK)) || {}; } catch (e) { return cartMem; } }
+let cartMem = {};
+function cartSet(c) { cartMem = c; try { localStorage.setItem(CK, JSON.stringify(c)); } catch (e) {} cartPaint(); }
+function cartItems() {
+  const c = cartGet(), out = [];
+  for (const k in c) { const [id, label] = k.split("|"), p = CATALOG.find(x => x.id === id), v = p && p.vars.find(x => x.label === label);
+    if (!p || !v || !inStock(v) || p.soon) continue; out.push({ k, p, v, q: Math.min(c[k], v.stock) }); }
+  return out;
+}
+function cartCombo(items) {
+  const lap = items.filter(i => i.p.id === "lapiz-universal" && /con repuestos/.test(i.v.label)).reduce((a, i) => a + i.q, 0);
+  const gua = items.filter(i => i.p.id === "guante-dibujo").reduce((a, i) => a + i.q, 0);
+  return Math.min(lap, gua);
+}
+function cartPaint() {
+  const items = cartItems(), n = items.reduce((a, i) => a + i.q, 0), combos = cartCombo(items), desc = combos * 10000;
+  const total = items.reduce((a, i) => a + i.q * i.v.price, 0) - desc;
+  $("cartbar").hidden = n === 0; document.body.classList.toggle("has-cart", n > 0);
+  $("cartsum").textContent = "🛒 " + n + (n === 1 ? " producto" : " productos") + " · " + gs(total);
+  const ul = $("cartlist"); ul.textContent = "";
+  items.forEach(i => {
+    const li = tag("li"), im = tag("img"), t = tag("div", "it", i.p.name), sub = tag("div", "sub", gs(i.q * i.v.price));
+    im.src = "fotos/" + i.v.photo + ".jpg"; im.alt = "";
+    if (i.p.vars.length > 1 || i.p.always) t.append(tag("small", null, i.v.label));
+    const qty = tag("div", "qty"), mi = tag("button", null, "−"), pl = tag("button", null, "+"), num = tag("span", null, i.q);
+    mi.type = pl.type = "button"; mi.setAttribute("aria-label", "Uno menos"); pl.setAttribute("aria-label", "Uno más");
+    mi.onclick = () => { const c = cartGet(); c[i.k] = i.q - 1; if (c[i.k] <= 0) delete c[i.k]; cartSet(c); };
+    pl.onclick = () => { if (i.q >= i.v.stock) return; const c = cartGet(); c[i.k] = i.q + 1; cartSet(c); };
+    pl.disabled = i.q >= i.v.stock;
+    qty.append(mi, num, pl);
+    const rm = tag("button", "rm", "Quitar"); rm.type = "button"; rm.onclick = () => { const c = cartGet(); delete c[i.k]; cartSet(c); };
+    li.append(im, t, sub, qty, rm); ul.append(li);
+  });
+  if (!items.length) ul.append(tag("li", "empty", "Tu carrito está vacío."));
+  $("cartft").hidden = !items.length;
+  $("cartcombo").hidden = !combos; $("cartcombo").textContent = "Combo lápiz universal + guante: −" + gs(desc);
+  $("carttot").textContent = gs(total);
+  const lines = items.map(i => "• " + i.q + " × " + i.p.name + (i.p.vars.length > 1 || i.p.always ? " (" + i.v.label + ")" : "") + " — " + gs(i.q * i.v.price));
+  if (combos) lines.push("• Combo lápiz universal + guante: −" + gs(desc));
+  const msg = "¡Hola Ziggy! Quiero hacer este pedido:\n" + lines.join("\n") + "\nTotal: " + gs(total) + "\n¿Está todo disponible?";
+  $("cartsend").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+  cardsPaint.forEach(f => f());
+}
+$("cartopen").onclick = () => $("cart").showModal();
+$("cartclose").onclick = () => $("cart").close();
+$("cart").addEventListener("click", e => { if (e.target === $("cart")) $("cart").close(); });
+window.addEventListener("storage", e => { if (e.key === CK) cartPaint(); });
 if (ONLY) { document.body.classList.add("product"); $("back").hidden = false; document.querySelectorAll('a[href^="#"]').forEach(a => a.href = location.pathname + a.getAttribute("href")); }
 render();
+cartPaint();
 </script>
 
 </body>
