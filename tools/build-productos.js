@@ -6,6 +6,7 @@ const root = path.join(__dirname, "..");
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const src = html.slice(html.indexOf("const CATALOG = ["), html.indexOf("];", html.indexOf("const CATALOG = [")) + 2);
 const CATALOG = new Function(src + "; return CATALOG;")();
+for (const p of CATALOG) for (const v of p.vars) if (v.uses) v.stock = Math.min(...v.uses.map(([id, label]) => { const q = CATALOG.find(x => x.id === id); const w = q && q.vars.find(x => x.label === label); return w ? w.stock : 0; }));
 const SITE = "https://ziggyta.github.io/";
 const gs = n => "₲" + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const esc = t => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");

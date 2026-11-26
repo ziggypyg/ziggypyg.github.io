@@ -11,7 +11,7 @@
 <meta property="og:description" content="Pack de 5. Para S Pen de tablets y celulares Samsung. No sirven para el S Pen de punta cónica (Tab S11 en adelante). ₲40.000. Pedidos por WhatsApp.">
 <meta property="og:type" content="product">
 <meta property="og:url" content="https://ziggyta.github.io/p/puntas-spen-clasicas/">
-<meta property="og:image" content="https://ziggyta.github.io/fotos/PUN-CLA-NEG.jpg?v=mwy4mrxc">
+<meta property="og:image" content="https://ziggyta.github.io/fotos/PUN-CLA-NEG.jpg?v=mwy4u06y">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1b1b31">
 <link rel="icon" href="fotos/logo.jpg">
@@ -249,7 +249,10 @@ const ONLY = document.documentElement.dataset.product || "";
 // La página como-pedir/ trae data-page="como-pedir" en el <html>.
 const HOWPAGE = document.documentElement.dataset.page === "como-pedir";
 const CATALOG = [
-  { id: "lapiz-universal", cat: "lapices", name: "Lápiz universal", note: "Con cable de carga. Sin caja sellada. Modelos con repuestos + guante anti-touch: combo ₲45.000.", vars: [
+  { id: "combo-lapiz-guante", cat: "lapices", name: "Combo lápiz capacitivo universal + guante", note: "Lápiz con cable de carga y puntas de repuesto, más guante anti-touch de dos dedos.", vars: [
+    { label: "Blanco", photo: "COMBO-LAP-GUA-BLA", price: 45000, was: 55000, stock: 0, uses: [["lapiz-universal", "Blanco, con repuestos"], ["guante-dibujo", "Negro"]] },
+    { label: "Negro", photo: "COMBO-LAP-GUA-NEG", price: 45000, was: 55000, stock: 0, uses: [["lapiz-universal", "Negro, con repuestos"], ["guante-dibujo", "Negro"]] } ] },
+  { id: "lapiz-universal", cat: "lapices", name: "Lápiz capacitivo universal", note: "Con cable de carga.", vars: [
     { label: "Blanco, con repuestos", photo: "LAP-CAP-BLA", price: 40000, was: 70000, stock: 8 },
     { label: "Negro, con repuestos", photo: "LAP-CAP-NEG", price: 40000, was: 70000, stock: 3 },
     { label: "Blanco, sin repuestos", photo: "LAP-CAP-BLA", price: 35000, was: 55000, stock: 1 } ] },
@@ -312,6 +315,11 @@ const CATALOG = [
 // Las variantes sin stock se muestran como agotadas; los productos agotados van al final.
 const inStock = v => v.stock > 0;
 const anyStock = p => p.vars.some(inStock);
+// El stock de los combos sale del stock de los productos que usan ("uses").
+function linkCombos(cat) {
+  for (const p of cat) for (const v of p.vars) if (v.uses) v.stock = Math.min(...v.uses.map(([id, label]) => { const q = cat.find(x => x.id === id); const w = q && q.vars.find(x => x.label === label); return w ? w.stock : 0; }));
+}
+linkCombos(CATALOG);
 const FILTERS = [["todo", "Todo"], ["promo", "Liquidación"], ["lapices", "Stylus"], ["puntas", "Puntas"], ["fundas", "Fundas"], ["cases", "Cases y láminas"], ["otros", "Accesorios"]];
 const $ = id => document.getElementById(id);
 const gs = n => "₲" + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
