@@ -32,4 +32,23 @@ for (const p of CATALOG) {
   fs.mkdirSync(path.join(root, "p", p.id), { recursive: true });
   fs.writeFileSync(path.join(root, "p", p.id, "index.html"), out);
 }
-console.log(CATALOG.length + " páginas generadas en p/");
+// Página "Cómo hacer tu pedido" en como-pedir/index.html
+{
+  const desc = "Retiro con cita previa en San Lorenzo, delivery en Asunción y Gran Asunción, y envíos a todo el país. Pedidos por WhatsApp.";
+  const head = `<title>Cómo hacer tu pedido · Ziggy</title>
+<base href="/">
+<link rel="canonical" href="${SITE}como-pedir/">
+<meta name="description" content="${esc(desc)}">
+<meta property="og:title" content="Cómo hacer tu pedido · Ziggy">
+<meta property="og:description" content="${esc(desc)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="${SITE}como-pedir/">
+<meta property="og:image" content="${SITE}fotos/compartir.jpg?v=2">
+<meta name="twitter:card" content="summary_large_image">`;
+  const out = html.replace(/<title>[\s\S]*?<meta name="twitter:card" content="summary_large_image">/, head)
+                  .replace('<html lang="es">', '<html lang="es" data-page="como-pedir">');
+  fs.rmSync(path.join(root, "como-pedir"), { recursive: true, force: true });
+  fs.mkdirSync(path.join(root, "como-pedir"), { recursive: true });
+  fs.writeFileSync(path.join(root, "como-pedir", "index.html"), out);
+}
+console.log(CATALOG.length + " páginas generadas en p/ y como-pedir/");

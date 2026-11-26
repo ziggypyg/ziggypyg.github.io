@@ -11,7 +11,7 @@
 <meta property="og:description" content="Elegí tu dispositivo. ₲110.000. Pedidos por WhatsApp.">
 <meta property="og:type" content="product">
 <meta property="og:url" content="https://ziggyta.github.io/p/vidrio-templado/">
-<meta property="og:image" content="https://ziggyta.github.io/fotos/VID-A16-TRA.jpg?v=mwy4gd23">
+<meta property="og:image" content="https://ziggyta.github.io/fotos/VID-A16-TRA.jpg?v=mwy4iryr">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1b1b31">
 <link rel="icon" href="fotos/logo.jpg">
@@ -96,6 +96,9 @@ h1 { margin: 0; font: 600 clamp(27px, 7.4vw, 42px)/1.15 var(--head); letter-spac
 .share { background: var(--white); border: 1px solid var(--line); border-radius: 3px; padding: 10px 4px; font: 500 14px/1.2 var(--head); color: var(--ink); }
 .share:hover { border-color: var(--ink); }
 body.product .hero-band, body.product .promo, body.product .chips { display: none; }
+body:not(.howpage) .how { display: none; }
+body.howpage .hero-band, body.howpage .promo, body.howpage .main, body.howpage .cartbar { display: none !important; }
+body.howpage .how .back { margin-top: 0; }
 .add { background: var(--white); border: 1px solid var(--green); border-radius: 3px; padding: 9px 4px; font: 500 13.5px/1.2 var(--head); color: var(--green); }
 .add:hover { background: var(--tint); }
 .add.in-cart { border-color: var(--coral); color: var(--coral-text); background: var(--tint); }
@@ -167,7 +170,7 @@ body.has-cart { padding-bottom: 72px; }
   <div class="in bar">
     <a href="./" aria-label="Ziggy, ir al catálogo"><img class="logo-img" src="fotos/logo.jpg" alt="Ziggy"></a>
     <nav class="links" aria-label="Contacto">
-      <a class="nav-how" href="#como-pedir">Cómo pedir</a>
+      <a class="nav-how" href="como-pedir/">Cómo pedir</a>
       <a href="https://wa.me/595984488787" target="_blank" rel="noopener">WhatsApp</a>
       <a href="https://www.instagram.com/ziggy.py/" target="_blank" rel="noopener">Instagram</a>
     </nav>
@@ -176,7 +179,7 @@ body.has-cart { padding-bottom: 72px; }
     <p class="eyebrow">Tecnología &amp; accesorios</p>
     <h1>Elegidos uno por uno, para vos</h1>
     <p class="lead">Elegís acá y nos pedís por WhatsApp.</p>
-    <a class="cta" href="#como-pedir">¿Cómo hacer tu pedido? <span aria-hidden="true">→</span></a>
+    <a class="cta" href="como-pedir/">¿Cómo hacer tu pedido? <span aria-hidden="true">→</span></a>
   </div></div>
 </header>
 <div class="promo"><div class="in"><span id="promo-a"></span><span>Hasta agotar stock</span></div></div>
@@ -186,6 +189,7 @@ body.has-cart { padding-bottom: 72px; }
   <main class="grid" id="grid"></main>
 </div>
 <section class="how" id="como-pedir" aria-labelledby="como-pedir-t"><div class="in">
+  <a class="back" href="./">← Ver el catálogo</a>
   <h2 id="como-pedir-t">¿Cómo hacer tu pedido?</h2>
   <p>Elegí cómo querés recibirlo y escribinos por WhatsApp.</p>
   <div class="steps">
@@ -242,6 +246,8 @@ body.has-cart { padding-bottom: 72px; }
 const WA = "595984488787";
 // En las páginas de producto (p/<id>/) el <html> trae data-product con el id del producto.
 const ONLY = document.documentElement.dataset.product || "";
+// La página como-pedir/ trae data-page="como-pedir" en el <html>.
+const HOWPAGE = document.documentElement.dataset.page === "como-pedir";
 const CATALOG = [
   { id: "lapiz-universal", cat: "lapices", name: "Lápiz universal", note: "Con cable de carga. Sin caja sellada. Modelos con repuestos + guante anti-touch: combo ₲45.000.", vars: [
     { label: "Blanco, con repuestos", photo: "LAP-CAP-BLA", price: 40000, was: 70000, stock: 8 },
@@ -415,6 +421,7 @@ $("cartopen").onclick = () => $("cart").showModal();
 $("cartclose").onclick = () => $("cart").close();
 $("cart").addEventListener("click", e => { if (e.target === $("cart")) $("cart").close(); });
 window.addEventListener("storage", e => { if (e.key === CK) cartPaint(); });
+if (HOWPAGE) document.body.classList.add("howpage");
 if (ONLY) { document.body.classList.add("product"); $("back").hidden = false; document.querySelectorAll('a[href^="#"]').forEach(a => a.href = location.pathname + a.getAttribute("href")); }
 render();
 cartPaint();
