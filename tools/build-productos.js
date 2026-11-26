@@ -6,7 +6,7 @@ const root = path.join(__dirname, "..");
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const src = html.slice(html.indexOf("const CATALOG = ["), html.indexOf("];", html.indexOf("const CATALOG = [")) + 2);
 const CATALOG = new Function(src + "; return CATALOG;")();
-const SITE = "https://ziggypyg.github.io/";
+const SITE = "https://ziggyta.github.io/";
 const gs = n => "₲" + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const esc = t => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 const ver = Date.now().toString(36);
